@@ -1,0 +1,424 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{lscape}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{graphicx}
+\graphicspath{ {../results/img/} }
+\usepackage[left]{lineno}
+\linenumbers
+\usepackage{setspace}\setstretch{2}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Dealing with grain mismatch between response and explanatory variables in species distribution models.},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Dealing with grain mismatch between response and explanatory variables in species distribution models.}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{abstract}{%
+\section*{Abstract}\label{abstract}}
+\addcontentsline{toc}{section}{Abstract}
+
+Species distribution models (SDMs) are extensively used in ecology to estimate species-environment relationships (SER) and predict species distributions across space and time. For this purpose, it is key to choose a relevant spatial resolution at the onset of the modelling process. However, environmental variables are often derived from global climate models at a resolution that does not necessarily correspond to the ecological grain at which the environment influences organisms. Such spatial misalignment between ecological and environmental data is a common challenge in SDMs because it can bias estimates of SER and jeopardise the robustness of predictions. Here, we focused on area-to-point spatial misalignment where environmental data are available at a grain (covariate grain) coarser than the ecological grain. We used simulations to study the effect of area-to-point misalignment on explanatory and predictive performances of three SDMs: a GLM, a spatial GLM and a Berkson Error Model (BEM) that accounts for covariate fine-grain heterogeneity within coarse grain cells. Overall, area-to-point misalignment reduces the explanatory power of the two GLMs by flattening estimated SER. Contrastingly, the BEM accurately recovered the true SER. However, its predictive power was low and similar to the two GLMs when predicting from coarse-grain data making it impossible to identify this model as the best model in a classical model selection framework. For all models, the increase of environmental heterogeneity reinforced the negative effect of area-to-point misalignment. Notwithstanding this, training models with data more heterogeneous than those used for predictions reduced the negative effect of spatial misalignment. While the BEM appears as a promising alternative to refine estimates of SER at the ecological grain, this model should not be used to predict at the covariate grain. It could however be used to downscale predictions from coarse grain datasets (e.g.~IUCN range maps) covering the full species range, hence avoiding niche truncation problems.
+
+\textbf{Keywords:} species distribution models, misalignment, spatial resolution, spatial grain, generalised linear models, Berkson error models
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Since their emergence several decades ago (Guisan and Zimmermann 2000), species distribution models (SDMs) have been broadly used to guide management or conservation actions (Guisan et al. 2013). By estimating species-environment relationships (SER), SDMs can characterise the suitable environmental conditions that management actions ought to maintain for effective conservation of any given species of interest (Greenwood et al. 2016). SDMs have also been used to predict species distribution ranges under both current and future environmental conditions and have therefore helped managers prioritise areas for conservation actions (Zurell et al. 2021). For such purposes, estimating SERs and associated species distributions at fine grain (i.e.~high resolutions) is key to designing ecologically-relevant management areas (McPherson et al. 2006).
+
+To date, SDMs have mostly been fitted with coarse-grain environmental covariates (Austin and Van Niel 2011), with the underlying assumption that species distributions are mainly driven by global or regional climate (Pearson and Dawson 2003). However, recent evidence has questioned this hypothesis (Rebaudo et al. 2016) with a number of studies showing that species distribution can also vary locally due to micro-climate variability (Meineri and Hylander 2017, Lembrechts et al. 2019). For instance, Ashcroft et al. (2009) highlighted the importance of fine-grain climate variability on the distribution of mountainous species. Similar studies conducted in forest systems revealed that canopy protection from sun radiation can buffer the effect of regional climate conditions by acting as a micro-refugia for some species (Zellweger et al. 2020, Stark and Fridley 2022). Hence, relying only on coarsely-resolved environmental covariates in SDMs can produce a mismatch between the ecological grain, the grain at which the environment influences a species, and the analysis grain of covariate (hereafter covariate grain), the grain at which the environment is described by covariates Potter et al. (2013). Such a mismatch might lead to misestimated SERs and low predictive power (Seo et al. 2009, McInerny and Purves 2011), particularly if the ecological grain is finer than the resolution of environmental covariates (Connor et al. 2018).
+
+Ideally, the relevant grain for environmental covariates/predictors in SDM should be defined by ecological knowledge regarding the study species (Dormann 2007). Unfortunately, grains of underlying ecological processes are generally unknown before the design of monitoring programs (Fletcher Jr. et al. 2023). Moreover, SDM studies commonly rely on existing species and environmental data, which largely limits the choice of analysis grains (Manzoor et al. 2018). For instance, many species data used in SDMs are collected at geo-referenced spatial locations (e.g., GBIF; Faurby and Araújo (2018)), while associated environmental covariates are often derived from gridded climate re-analysis product (e.g., WorldClim Hijmans et al. 2005 or NOAA products (\url{https://www.ncei.noaa.gov/}) for terrestrial and marine environments) or remote sensing data (Pettorelli et al. 2014). Thus, combining existing data from heterogeneous datasets is likely to induce area-to-point spatial misalignment (Gotway and Young 2002), that is a mismatch between a given covariate grain and a finer ecological response grain.
+
+Area-to-point misaligned datasets can be spatially matched by either upscaling or downscaling the resolution of the response variable or covariates respectively (Latimer et al. 2006, Keil et al. 2013). Upscaling methods such as spatial thinning of fine-grain response data within coarse-grain environmental cells can be used (Steen et al. 2021), but lead to information loss. Thus, downscaling might be preferred when the analysis aims to predict fine-grain species distribution. However, even if methods for downscaling environmental data exist (Hewitson and Crane 1996), they are rarely applied in SDM-based studies (Manzoor et al. 2018). Thus, area-to-point misalignment is usually not considered when describing fine-grain species distribution, implying that fine-grain species records within a coarse-grain grid are all associated with the same environmental value despite known fine-grain environmental heterogeneity (Latimer et al. 2006). This ``naïve'' downscaling can introduce errors in model covariates, which can compromise SDM accuracy (Latimer et al. 2006). For instance, considering environmental data at a grain coarser than the ecological grain (Potter et al. 2013) implies that the observed environment is a smoothed (less variable) version of the environment experienced by the species (Fig. \ref{fig:fig1}; McInerny and Purves (2011)). McInerny and Purves (2011) showed that such errors in covariate estimates could flatten estimated SERs with consequences on model predictive performance. In addition, not considering fine-grain environmental heterogeneity is likely to induce spatial autocorrelation not captured by the coarse-grain covariate, leading to bias in SDMs (Dormann et al. 2007, Knegt et al. 2010). Here, we investigate the performance of two methods previously proposed to account for the fine-grain variability not described by coarse-grain environmental covariates: Berkson error models (BEMs, McInerny and Purves 2011, Martínez-Minaya et al. 2018) and point-level spatial GLMs (Latimer et al. 2006).
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth,height=1\textheight]{../results/img/figure1} 
+
+}
+
+\caption{Illustration of area-to-point misalignment effect on simulated relationships between an explanatory variable (X) and species probabilities of presence ($\psi$). Left panel A) represents a scenario with no misalignment, where species and environmental data are both sampled at the ecological grain (EG, grain at which the species is influence by the environment). Right panel B) represent a scenario where covariate is a gridded climate re-analysis product describing average environmental conditions at a given covariate grain (CG) coarser than the ecological grain at which species presence-absence (Y) are sampled. Superscripts indicate the grain at which the data are sampled. Black lines represent the (true) simulated species-environment relationship used to simulate the probabilities of presence from the covariate at ecological grain. Points represent hypothetical samples of 300 locations from which environmental data have been extracted at A) the ecological grain or B) a coarser covariate grain. Note the difference of amplitudes in observed covariates (x-axis) between A) and B).}\label{fig:fig1}
+\end{figure}
+
+BEMs and spatial GLMs account for unobserved fine-grain environmental variability in different ways. BEMs estimate SERs by fitting the response variable to an unobserved (error-free) covariate assumed to be more variable than the available (error-prone) covariate (see Blangiardo and Cameletti (2015) and Muff et al. (2015) for more details). Alternatively, spatial GLMs include a random spatial effect that accounts for unexplained fine-grain variability (Latimer et al. 2006). To our knowledge, the efficiency of these two models in accounting for area-to-point misalignment in SER estimates has not been thoroughly tested. Indeed, although McInerny and Purves (2011) investigated the ability of BEM for estimating SERs, they assumed a known variance error between the unobserved error-free and the observed error-prone environment. This information is however unavailable for most climatic datasets. In addition, spatial GLMs can improve explanatory or predictive power compared to non-spatial models when spatial heterogeneity remains unexplained by covariates (Dormann et al. 2007). However, to our knowledge, spatial GLMs have not been tested in the case of area-to-point misalignment.
+
+In this study, we investigate how area-to-point misalignment, when environmental data are available at a coarser grain than the ecological grain, affects the performance of three alternative SDMs: a GLM (a frequently used SDM; Norberg et al. (2019)), a spatial GLM and a BEM, which can both be relevant to address area-to-point misalignment (Latimer et al. 2006, Martínez-Minaya et al. 2018). We expect the problem of spatial misalignment not only to vary across models but also to increase with both increasing environmental heterogeneity, and coarsening of covariate grain (i.e.~higher level of spatial misalignment). Relative to the GLM, the BEM and the spatial GLM are expected to more accurately estimate SERs McInerny and Purves (2011), but how well they can predict fine grain species distributions using coarse grain environmental data remains unclear. Using simulations, we assessed alternative models performances regarding (1) SERs estimates and (2) predictive power in new environments across different levels of spatial heterogeneity and spatial misalignment.
+
+\hypertarget{materials-and-methods}{%
+\section{Materials and methods}\label{materials-and-methods}}
+
+\hypertarget{terminology-and-data-structure}{%
+\subsection{Terminology and data structure}\label{terminology-and-data-structure}}
+
+Area-to-point misalignment describes the case where we observe a response variable (e.g., species occurrences, count, presence-absence) at \(N\) spatial point locations, while associated explanatory variables (e.g.~environmental descriptors) are available at a coarser grain, typically across a grid of \(I\) cells, each of which can contain multiple sampling points. Importantly, environmental variability is usually neglected within each cell where all points are assumed to share the same environment. This leads to an area-to-point misalignment problem where the grain of the response variable is finer than the one of the predictor variable. We denote \(Y_{j(i)}^{RG}\) the observed response variable (where RG stands for response grain) at sampling point \(j\) within grid-cell \(i\), for \(i = \{1, \cdots, I\}\) and \(j(i) = \{1, \cdots, J_i\}\) , with \(J_i\) the number of sampling points in grid-cell \(i\) and \(\sum_i^I J_i = N\) the total number of sampling points. \(X_{j(i)}^{CG}\) is the value of the available covariate (where CG stands for the covariate grain, which is coarser than the RG) within grid-cell \(i\) for any sampling point \(j(i)\). \(X_{j(i)}^{RG}\) is the true (or error-free) value of the environmental variable at sampling point \(j\) within grid cell \(i\) (i.e.~at the same resolution as the response variable). In the case of the area-to-point misalignment described in this study, \(X_{j(i)}^{RG}\) is unobserved and assumed to drive ecological processes (species distribution in this case). As such, the response grain is considered as equal to the ecological grain (denoted EG; i.e.~the grain at which the ecological process takes place). Note that this case of area-to-point misalignment can be extended to cases where the response variable is observed at a grid-level (i.e.~not necessarily points) at a finer resolution than the CG.
+
+\hypertarget{simulation-study}{%
+\subsection{Simulation study}\label{simulation-study}}
+
+We tested the effect of area-to-point spatial misalignment on the explanatory and predictive performances of the models using a virtual species approach (Meynard and Kaplan 2013) where species distribution depends on a single covariate. The simulation design, represented in Fig. \ref{fig:fig2}, consisted of three steps: (A) a data generating step using a known underlying SER to simulate 90 datasets subject to three different levels of area-to-point misalignment, (B) a model fitting step where the three models were fitted to the different simulated datasets for a total of 270 models, and (C) a model evaluation step to assess the ability of models to explain, interpolate and extrapolate probabilities of species presence at the ecological grain.
+
+We simulated a grid of 1000 x 1000 points representing a virtual sampling area. The grain of this grid, the point level, was next considered as the ecological grain (EG). We simulated the virtual environment as a Gaussian spatial random field using a Matérn covariance matrix to represent spatial dependencies between spatial units. We set the spatial range (\(\rho\), i.e.~the distance at which the spatial correlation is close to 0.1; Lindgren et al. (2011)) and variance (\(\sigma^2\)) parameters of the Matérn function to 50 units and 1, respectively. From these point-level environmental values (i.e.~covariate values at the ecological grain \(X^{EG}_j\)) we calculated virtual probabilities of presence at the point level (i.e.~at the ecological grain, \(\psi^{EG}_j\)) using a quadratic linear relationship: \(\psi^{EG}_j = \beta_0 + \beta_1 X^{EG}_j + \beta_2 {X^{EG}_j}^2\). We chose the coefficients (\(\beta_0\) = 3, \(\beta_1\) = 1.5, \(\beta_2\) = -3) to describe a sharp bell-shaped SER. We then simulated the species presence-absence data at the point level, \(Y^{EG}_j\), using random draws from a Bernoulli distribution with parameter \(\psi^{EG}_j\).
+
+In the virtual observation process, we coarsened the resolution of the point-level environment by a factor 5, 25 or 50 corresponding respectively to three different covariate grains (fine, medium, or coarse). The environment at grid level was generated by averaging point level environmental values comprised within each grid cell (\(X^{CG}_i = \frac{1}{J_i}\sum_{j(i)}X^{EG}_{j(i)}\)). We chose the three grain sizes as fractions of \(\rho\) the environmental spatial range (\(\rho/10 = 5\), \(\rho/2 = 25\), \(\rho = 50\)). By doing so, we assumed that the effect of area-to-point misalignment depends on a ratio between the covariate grain and the environmental spatial heterogeneity rather than the absolute value of the covariate grain (Gotway and Young 2002, Naimi et al. 2014). Indeed, we expect a greater loss of information when coarsening the covariate in heterogeneous environments (low spatial range) than in homogeneous ones (high spatial range; Lu and Jetz (2023); Guo et al. (2023)).
+
+We then virtually sampled the simulated survey area by randomly selecting 300 sampling points. We simulate no bias in species sampling (i.e., perfect detection). Observed presence-absence data were thus equal to those simulated at the ecological grain (i.e.~\(Y_{j}^{RG} = Y_j^{EG}\)). At each sampling point \(j\), observed covariate corresponds to the grid-level environment (i.e.~for any point \(j\) within grid cell \(i\): \(X_{j(i)}^{CG} = X_i^{CG}\)). We replicated the virtual sampling process 30 times, resulting in 90 simulated datasets (3 response grains x 30 replications). The three models were fitted on each dataset (i.e.~90 train datasets and 270 fitted models).
+
+To evaluate the predictive performance of the models, we also simulated three different types of test datasets. First, to evaluate interpolation, for each train dataset we randomly sampled 300 new points within the same environment as for train datasets. To evaluate extrapolation, we simulated two new grids of 1000 x 1000 points \(X_{new1}\) and \(X_{new2}\) where the environmental conditions were more homogeneous or more heterogeneous relative to the train datasets, with associated spatial correlation range of environmental values five times larger for \(X_{new1}\) (\(X_{new1} = 250\)) and five times smaller for \(X_{new2}\) (\(X_{new2} = 10\)). For both new environments, the same generating process as for the train dataset was applied producing known probabilities of presence, presence-absence data and covariate values at the three covariate grains.
+
+\begin{figure}
+\includegraphics[height=0.85\textheight]{figure2.pdf} \captionof{figure}{Representation of the simulation study, from data generation and model fitting to model evaluation, which was designed to quantify the effect of area-to-point spatial misalignment on three models' explanatory and predictive performances. EG = Ecological Grain (grain at which species experiences its environment); CG = Covariate Grain (grain of the covariate used to fit the models, with indices f, m and c standing for fine, medium and coarse, the different grain sizes); BEM = Berkson Error Model; spGLM = point-spatial GLM; $\psi$ = probability of presence; RMSE = Root-Mean-Square Error.} 
+\label{fig:fig2}
+\end{figure}
+
+\hypertarget{modelling-framework}{%
+\subsection{Modelling framework}\label{modelling-framework}}
+
+Three models were considered: a Generalized Linear Model (GLM), a spatial Generalized Linear Model (sp-GLM), and a Berkson Error Model (BEM). We fitted these models on presence-absence data, but note that these models can be fitted to other response variables (e.g.~detection/non-detection, count, presence only). All models assume that the response variable \(Y^{RG}_{j(i)}\) at sampling point \(j(i)\) (i.e.~at the expected ecological grain) included in cell \(i\) relies on the probability of presence \(\psi^{RG}_{j(i)}\): \(Y^{RG}_{j(i)} \sim Bernoulli(\psi^{RG}_{j(i)})\). Each model makes specific assumptions about the relationship between the probability of presence and the environment. We fitted all models using scaled covariates (with mean 0 and standard deviation 1). For simplicity, we present the formulation of the alternative models using one misaligned covariate, but this can be extended to more covariates.
+
+Three models were considered: a Generalized Linear Model (GLM), a spatial Generalized Linear Model (sp-GLM), and a Berkson Error Model (BEM). We fitted these models on presence-absence data, but note that these models can be applied to other response data types (e.g.~detection/non-detection, count, presence only). All models assume that the response variable \(Y^{RG}_{j(i)}\) at sampling point \(j(i)\) (i.e.~at the expected ecological grain) included in grid-cell \(i\) relies on the probability of presence \(\psi^{RG}_{j(i)}\): \(Y^{RG}_{j(i)} \sim Bernoulli(\psi^{RG}_{j(i)})\). We assumed that the probability of presence is related to the environment through different formulations depending on the model. We fitted all models using scaled covariates (with mean 0 and standard deviation 1). In the following, we present the model formulations using a unique misaligned covariate for simplicity, but this can be extended to more covariates.
+
+The GLM considers that the environment at the covariate grain (i.e.~the grid level), \(X^{CG}_i\), is the only driver of variation in the probability of presence at the point level. In other words, the GLM assumes that the covariate grain is equal to the ecological grain. Thus the SER is modelled as follows:
+\[ logit(\psi^{EG}_{j(i)}) = \beta_0 + \beta_1 X^{CG}_i + \beta_2 {X^{CG}_i}^2 \]
+where \(\beta_0\) is the probability of presence on the logit-scale in average environmental conditions (i.e., when the scaled covariate is null), \(\beta_1\) and \(\beta_2\) are the coefficients representing respectively the linear and the quadratic effects of environmental covariate \(X^{CG}\). Note that we used a logit-link function as we modelled presence-absence data, but other link functions can be used depending on the type of data considered (e.g.~a log-link function can be used for count data modelled with a Poisson distribution).
+
+The spatial GLM is a mixed model that incorporates a spatial random effect, \(\gamma_{j(i)}\), that allows variability between spatial points within a given covariate-grain grid cell. This spatial random effect allows capturing spatial signals not explained by the predictors (Zurell et al. 2021). For example, unobserved spatial patterns could result from missing spatially coherent or biological predictors (e.g., dispersal ability). Here, the spatial random effect is supposed to capture variability at the ecological grain, within each covariate grain cell. It is assumed that the probability of presence not only depends on the covariate grain environment (as for the classic GLM) but also varies depending on a fine grain latent spatial field. The model is written as follows:
+\begin{align*}
+logit(\psi^{EG}_{j(i)}) &= \beta_0 + \beta_1 X^{AG}_i + \beta_2 {X^{AG}_i}^2 + \gamma_{j(i)} \\
+\boldsymbol{\gamma} &\sim MVN(\boldsymbol{0}, \boldsymbol{\Sigma})
+\end{align*}
+where \(\boldsymbol{\gamma}\) is a vector of dimension \(N\), \(\boldsymbol{\Sigma}\) is the spatial covariance structure whose generic element is \(\Sigma_{u,v} = \sigma_\gamma^2 \times Matern(d_{u,v}, \kappa)\) where \(\sigma_\gamma^2\) is the variance component, \(Matern(\cdot,\cdot)\) is the Matérn function which describes how the correlation between two points (here \(u\) and \(v\)) decreases with the Euclidean distance separating them (denoted \(d_{u,v}\)), and where \(\kappa\) is a scaling parameter related to the spatial range \(\rho\), i.e., the distance at which the spatial correlation between two points is close to 0.1. It can be derived from \(\kappa\) by: \(\rho = \frac{\sqrt{8\nu}}{\kappa}\), with \(\nu\) representing the degree of smoothness of the spatial process and usually fixed to one (Zuur et al. (2017), p197).
+
+The BEM jointly estimates the covariate and probability of presence at the point level (i.e.~the ecological grain). It considers that the observed environment at the grid level \(X^{CG}_i\) is a smoothed version of the environment at the finer ecological grain \(X^{EG}_{j(i)}\), which is assumed to be the ``true'' driver of species distribution. This latent variable is modelled as follows:
+\[X^{EG}_{j(i)} \sim N(X^{CG}_i, \sigma_X^2)\]
+with \(\sigma_X^2\) the variance parameter that describes the fine grain variability lost by averaging the environment at coarser grains. The probability of presence is modelled as a function of the latent variable \(X^{EG}\):
+
+\[ logit(\psi^{EG}_{j(i)}) = \beta_0 + \beta_1 X^{EG}_{j(i)} + \beta_1 {X^{EG}_{j(i)}}^2.\]
+
+\hypertarget{parameter-estimation}{%
+\subsection{Parameter estimation}\label{parameter-estimation}}
+
+We fitted the GLM and the BEM within a Bayesian framework using MCMC sampling with the R package nimble Team (2018). We ran three chains for each analysis with a burn-in of 10,000 and an additional 200,000 iterations with a thinning rate of 50. For prior distributions of parameters \(\beta_1\) and \(\beta_2\), we used normal distribution with a zero mean and a precision of 0.1. For the intercept, \(\beta_0\), we specified a prior distribution on a derived ecologically meaningful parameter, \(\psi^{\star} = logit^{-1}(\beta_0)\), representing the species probability of presence in average environmental conditions. We used a uniform prior bounded between 0 and 1 for this derived parameter, assuming no prior knowledge on species distribution patterns in average environmental conditions. We used half-Cauchy prior (Gelman et al. 2013) for the standard-deviation parameter in the BEM (\(\sigma_X\)). We assessed convergence by examining the Gelman-Rubin statistic (\(\hat{R}\)) with a threshold fixed to 1.1 (Gelman et al. 2013).
+We fitted the sp-GLM using the INLA and SPDE approaches using the R package R-INLA (Rue et al. 2009, Lindgren et al. 2011). The ``big n problem'', i.e.~large number of sampling locations, in spatial analysis prevented us from using MCMC samplers (Kery and Royle 2021). We used R-INLA's default priors for the regression coefficients. We assigned a fixed shape (\(\nu = 1\)), and penalized complexity priors for the spatial range \(\rho\) and marginal standard deviation \(\sigma_{\gamma}\), such that \(Pr(\rho < 1) = 0.05\), and \(Pr(\sigma_{\gamma} > 5) = 0.05\). The mesh was constructed to allow fine grain variability by specifying a max edge length of 10, smaller than the spatial environmental range.
+
+\hypertarget{model-performance-assessment}{%
+\subsection{Model performance assessment}\label{model-performance-assessment}}
+
+We evaluated model performance by investigating their ability to (1) infer the simulated SER (i.e.~the explanatory power at the ecological grain), (2) predict species distribution in new locations of the study area (i.e.~their predictive power with regards to interpolation), and (3) predict species distribution in new environments (i.e.~their predictive power with regards to extrapolation, also called model transferability; Yates et al. (2018)). Regarding (2) and (3), predictions were made from covariate grain data because in practice, although the aim is to estimate the SER and predict species distribution at the ecological grain, this grain is usually not available (otherwise, one would just use these data for model fitting). Yet, we also evaluated the model's predictive power from ecological grain covariate. Since results were similar to the ones related to (1), we here only present results associated with estimates of SER.
+
+Regarding explanatory power, we calculated the relative bias regarding three parameters (Fig. 2, B1) describing the SER (Supporting information): the maximum probability of presence (\(\psi_{max}\)), the environmental optimum (\(\theta\); i.e.~the environmental value associated with \(\psi_{max}\)), and the width of the SER at a specified probability threshold of 0.05 (\(\omega\); i.e.~a measure of the species ecological tolerance). We also evaluated explanatory power by computing discrimination and calibration metrics that do not require knowledge of the true SER, as is the case in real case studies. To assess model discrimination (i.e.~model ability to distinguish between occupied and unoccupied sites) we calculated the area under the receiver operator characteristic curve (AUC). To assess model calibration (i.e.~model accuracy with regards to predicted probabilities of presence) we calculated Brier's Score (Brier). Brier assesses the mean squared error between predicted probabilities of presence and observed presence-absence, thus lower values are better (Liu et al. 2011). Both metrics were calculated by comparing observed presence-absence used to fit the models to probabilities of presence predicted from observed environmental values by the fitted models.
+
+To evaluate the predictive power of the three models, we compared simulated probabilities of presence (i.e.~true values, \(\psi_{j'}\)) with those predicted from the covariate grain environmental values by the fitted models (denoted \(\tilde\psi_{j'}\)). These comparisons were conducted for the three types of test datasets: the one used to evaluate the interpolation ability of the models and the two used for assessing extrapolation capacity of models in more homogeneous or heterogeneous environments. We measured average accuracy of models to predict species probabilities of presence by calculating the root-mean-square errors (RMSE) as follows:
+\[RMSE = \sqrt{\frac{1}{J'}\sum(\psi_{j'} - \tilde\psi_{j'})^2}\]
+where \(\psi_{j'}\) is the true probability of presence at site \(j’\), \(\tilde\psi_{j'}\) is the mean predicted value by fitting models (i.e.~the mean of posterior distribution) and \(J’\) is the number of sites. Low values indicate a higher accuracy. We also computed prediction interval scores (PIS; see equation (43) in Gneiting and Raftery (2007)) that evaluate precision and coverage of credible intervals of predictions by penalizing large intervals and intervals that do not include the true value, with high values indicating poor predictive performance. As for explanatory power, we also computed discrimination (AUC) and calibration (Brier) metrics where predicted probabilities of presence were compared with observed presence-absence of the test data.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{estimation-of-species-environment-relationships}{%
+\subsection{Estimation of species-environment relationships}\label{estimation-of-species-environment-relationships}}
+
+For all three models, biases in estimates of SER increased with increasing covariate grain sizes (i.e.~decreasing covariate resolution), but responses varied across models (Fig. 3). The three models produced, on average, accurate estimates of optimum positions for all covariate grains but variability among replicates of relative bias in optimum estimates increased with increasing grain size from 0.16 to 0.50 and from 0.16 to 0.49 for GLM and spGLM respectively, and from 0.16 to 0.64 for BEM. For the three models, both underestimating of maximum probability of occurrence, and overestimating of ecological width, increased with covariate grain size leading to flatter SER estimates (Supporting information). BEM produced the smallest bias, with a mean negative relative bias in maximum probability estimates of -0.03 (sd = 0.02) and a mean positive relative bias in ecological width estimates of 0.05 (sd = 0.11) at the coarsest resolution. In comparison, GLM and spGLM produced relative bias 7.3 and 6.7 times larger for maximum probability and relative bias in ecological width estimates 7.6 and 7 times larger than the BEM at the coarsest grain size.
+
+\begin{figure}
+\includegraphics{figure3.pdf} \captionof{figure}{Ability of the three alternative models (BEM, Berkson Error Model; GLM, Generalized Linear Model; spGLM, spatial GLM; colour-coded on the graph) to infer the simulated species-environment relationship when fitted to environmental covariate at three grain sizes coarser than the ecological response grain. Relative bias between simulated and estimated values were calculated for three parameters describing unimodal species-environment relationships (a) maximum probability of presence, b) environmental optimum, and c) ecological width. Shaded points represent bias for each of the 30 simulated train datasets. Filled points represent the average bias among all train datasets while the vertical bars represent the associated standard-deviations.} 
+\label{fig:fig3}
+\end{figure}
+
+Performance metrics comparing observed presence-absence with predicted probabilities of presence from environmental covariate grain data indicated a decrease in explanatory power of the three models with increasing covariate grain size (Fig. 4). However, in contrast with previous results, these performance metrics suggested a lower explanatory power of the BEM than the spGLM at all covariate grain sizes with regards to both model calibration (higher Brier scores for the BEM) and discrimination (lower AUC values for the BEM). The GLM had equivalent discrimination power as the BEM and better calibration power, with lower Brier scores when fitted with covariates at medium and coarse grain sizes.
+
+\begin{figure}
+\includegraphics{figure4.pdf} \captionof{figure}{Explanatory performances of the three alternative models (BEM: Berkson-Error Model, GLM: Generalized Linear Model, spGLM: spatial GLM) fitted with simulated point-level presence-absence data (i.e. at ecological grain) and grid-level covariate resolved at different grain sizes coarser than the ecological response grain. Model performance was evaluated with regards to a) discrimination and b) calibration power by comparing the point-level presence-absence with the predicted point-level probabilities of presence from grid-level environmental values. Filled points represent mean performance metrics over the 30 simulated train datasets (shaded points) while vertical bars represent the associated standard deviations.} 
+\label{fig:fig4}
+\end{figure}
+
+\hypertarget{predictive-performance}{%
+\subsection{Predictive performance}\label{predictive-performance}}
+
+Predictive performance of all models, in terms of both interpolation and extrapolation, decreased with increasing covariate grain size and spatial heterogeneity (Figure 5). The lowest predictive performances were obtained when fitting models at the coarsest covariate grain while predicting in more heterogeneous environmental conditions than the training set. The three models had similar discrimination ability (Figure 5 first row) for all covariate grains and types of test data, though variations were observed depending on calibration metrics. Since Brier and RMSE produced similar results we only present results from the former (Supporting information for RMSE results). Different results were obtained with the PIS. Brier indicated equivalent predictive abilities for GLM and spGLM for both interpolation and extrapolation, regardless of environmental heterogeneity. In comparison, when fitted with medium and coarse covariate grains, BEM had lower predictive abilities when interpolating or when extrapolating in more heterogeneous conditions, whereas it performed slightly better in homogeneous environments. GLM had the worst PIS in all scenarios and was the most negatively affected by misalignment, because it tended to produce too confident predictive intervals not including the true value (Supporting information). The BEM and spGLM produced equivalent PIS in the case of interpolation. However, spGLM was better at predicting ecological grain species distribution from environmental covariate grain data in a more heterogeneous environment for all covariate grain sizes, while BEM was better at predicting in a more homogeneous environment for all covariate grain sizes.
+
+\begin{figure}
+\includegraphics{figure5.pdf} \captionof{figure}{Evaluation of predictive performance of three models (BEM: Berkson-Error Model, GLM: Generalized Linear Model, spGLM: spatial GLM) fitted with a misaligned covariate at three covariate grains coarser than the ecological grain with regards to their ability to predict species distribution at the ecological grain from environmental values at the covariate grain across three levels of environmental spatial heterogeneity (the three columns). 2nd column informs on models’ interpolation ability with predictions performed at a random set of locations selected within the same environment as the training set. 1st and 3rd columns inform on models’ extrapolation ability with predictions performed at a random set of locations selected within a more homogeneous environment (1st column) or a more heterogeneous environment (3rd column) than the one used to simulate train datasets. Performance metrics were computed by comparing predicted probabilities of presence at the ecological grain when fitting models at different covariate grains (fine, medium, coarse) against observed presence-absence (1st and 2nd row) or simulated probabilities of presence (3rd row) at the ecological grain. Filled points represent mean performance metrics over the 30 simulated train datasets (shaded points) while vertical bars represent the associated standard deviations.} 
+\label{fig:fig5}
+\end{figure}
+
+Overall, for the majority of simulated scenarios, we found lower predictive performance with regards to calibration metrics for the BEM than for the two GLMs when predicting probabilities of presence at ecological grain from environmental values at covariate grain (Fig. 5). This result may seem in contrast with the results above indicating that the BEM accurately estimated SER (Fig. 3). This can be explained because of the differences between the observed SER at the covariate grain, which relies on a truncated description of the environmental conditions experienced by the species, and the true SER at the ecological grain (Fig. 1). In contrast, although the two GLMs less effectively infer the true SER, their predictive performance outcompete the BEM because, by essence, these models do not aim to estimate the true SER (at the ecological grain) but rather the observed SER at the covariate grain which directly advantages them when predicting from data at the covariate grain. However, because BEM better estimated SER at the ecological grain than the GLMs, it better predicted probabilities of presence at ecological grain from ecological grain environmental data (Supporting information).
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+In this study, we evaluated the effect of area-to-point spatial misalignment between predictor and response variables (i.e.~mismatch between a covariate grain and a finer response grain) on the explanatory (estimates of SER) and predictive power of three alternative SDMs: a Berkson-Error Model (BEM), a GLM and a spatial GLM (spGLM). We performed simulations across different levels of (1) covariate grain sizes and (2) environmental heterogeneity to compare the three models' response to area-to-point spatial misalignment. The BEM performed well in estimating SER with an average bias \textasciitilde7 times smaller than for the GLM and the spGLM, which both estimated flatter SERs. Despite its better performance in estimating SER, the BEM did not perform well in predicting species distributions from coarse grain data, with a performance similar to the two other models. In fact, for all models, predictive power decreased with increasing area-to-point spatial misalignment. This bias was particularly pronounced as the degree of environmental heterogeneity increased. Altogether, these findings suggested that despite a lower performance in estimating SER, the GLM and its spatial counterpart performed better than the BEM in predicting species distributions from covariate-grain data, and would therefore be selected in a model selection framework. However, because SER are misestimated by these two models, this selection process could be problematic (1) for ecological interpretation (e.g.~poor estimate of environmental tolerances) and (2) when predicting in novel conditions, particularly in more spatially heterogeneous environments.
+
+As expected, area-to-point misalignment implies a loss of information, leading to an erroneously smoothed environment (Fig. 1, Supporting information). This error in covariates is known as the regression dilution problem and leads to flattened unimodal SER estimated by GLMs (McInerny and Purves 2011). In this study, we show that the BEM accurately estimates ecological grain SER features even when fitted with coarse grain covariate. The BEM thus appears as an interesting candidate model to account for area-to-point misalignment when estimating SERs. This finding is in line with previous studies assuming a known degree of error in the smoothed environmental conditions at covariate grain relative to the finer and more variable ecological grain values (McInerny and Purves 2011). Here, we highlight that specifying the degree of error is not a prerequisite for BEM to accurately estimate SER at the ecological grain, which widens its potential application in a range of contexts. Nevertheless, note that the BEM we developed assumes a constant error across grid cells (i.e.~spatial stationarity Dormann et al. (2007)). This assumption may not always be reasonable, especially in broad-extent studies, and additional research is needed to investigate how model performance is affected when violating this assumption. By contrast with BEM, we highlight from simulations that adding point-level spatial random effects does not solve the regression dilution problem. Simultaneously, we find that explanatory performance metrics calculated from the observed presence-absence suggest the opposite, that is, a better fit with the spatial GLM than with the BEM despite a flattened SER relative to the true one. Hence, a model selection framework based on performance metrics can erroneously select the spatial GLM to identify the drivers of species distribution. Then, following standard SDM workflows one can select important variables based on their significance (Latimer et al. 2006). Yet, because spatial GLMs produce flattened SER and larger estimates of uncertainty about SER, this approach may discard even more important drivers of species distribution due to area-to-point misalignment than non-spatial GLM (Mertes and Jetz 2018). Thus, if the study aims to identify the ecological processes driving species distributions, spatial GLM fitted with only coarse covariates should not be used unless there is evidence (e.g.~from the literature) that the covariate grain matches the ecological grain.
+
+For the three models, predictive power (both calibration and discrimination) decreased as the magnitude of area-to-point spatial misalignment increased. This problem is strengthened by the level of environmental heterogeneity because for a given magnitude of spatial misalignment, the loss of information strongly increases with both coarsening of covariate grain and increasing spatial heterogeneity (Supporting information). Such synergistic effects have already been observed when fitting non-spatial GLMs for both point-to-point (Naimi et al. 2014) and area-to-point spatial misalignments (Connor et al. 2018). Here, we add to previous knowledge by showing that BEM and spGLM - two models potentially relevant to account for area-to-point misalignment{]} - are also sensitive to the combined effects of covariate grain size and spatial environmental heterogeneity. Specifically, both BEM and spatial GLM have equivalent discriminatory abilities as GLM when predicting fine grain species distribution from covariate grain, implying that they can not account for misalignment in this regard. However, they can improve predictions of probabilities of presence (i.e.~model calibration) relatively to GLM. BEM proves to be better when predicting in smoother environment, but poorer for equally or more heterogeneous environments than the one used for model fitting. Measurement error models, and thus BEMs, are not assumed to perform better than GLMs with regards to predictions when using error-prone predictors (Stoklosa et al. 2015), in our case new environmental conditions at covariate grain. This is because GLMs estimate covariate grain SER, while BEMs estimate ecological grain SER; then, it follows that the best predictions will arise from the GLMs when using covariate grain predictors. However, because magnitude of spatial misalignment effect is not only induced by the mismatch between covariate and ecological grain but also by the level of covariate spatial heterogeneity (Mertes and Jetz 2018), the covariate grain SER fitted by the GLMs does not necessarily reflect the covariate grain SER in new environmental conditions. For instance, in more homogeneous environments, because effect of misalignment is attenuated by low spatial heterogeneity, the covariate grain SER is closer to the ecological grain SER, explaining the relative better performance of BEM in those situations. The spatial GLM produces equivalent mean predictions of presence probabilities as GLM in all scenarios, but better estimates of uncertainties associated with those predictions. This result confirms that spatial GLM improves uncertainty estimates when spatial autocorrelation is not entirely explained by covariates (Dormann et al. 2007), which is to expect in case of area-to-point misalignment (Knegt et al. 2010).
+
+Overall, we emphasize that spatial GLM and BEM can help to account for issues arising from area-to-point misaligned data in SDMs, although not regarding all aspects of model inference. For instance, spatial GLM can improve quality of predictions by a better estimation of uncertainties associates with predictions compared to classic GLM. However, spatial GLM as classic GLM produces biased SER and thus should not be used for ecological interpretation about species distribution drivers, unless external evidences show that the covariate grain matches the ecological grain. Besides, its capacity to better predict species distribution in new environmental conditions is also limited by its biased SER. For instance, in a different context (e.g.~fine-grain environmental data obtained from remote sensing in the same area or extrapolation in another area presenting a higher spatial heterogeneity) spatial GLM would perform poorly because the estimated covariate SER would no longer correspond to the SER at the new covariate grain. Hence, the BEM because of its accuracy to retrieve the true SER (i.e.~at the ecological grain) appears as a more interesting candidate to fit area-to-point misaligned data. We also believe that further investigations on BEM behaviours can widen its range of applications and benefit to SDM-based studies. For instance, it would be interesting to investigate BEM behaviours in more complex scenarios than the one tested in our simulations. Specifically, rather than considering only one source of variability uncaptured by covariates (i.e.~the loss of fine-grain environmental variability due to spatial misalignment), considering additional sources of variability (e.g.~missing predictors, temporal misalignment) often present in real case studies. One can also be interested in testing the accuracy of BEM when species distribution is influences by multiple covariates with different ecological grains? Finally, we believe that BEM can be of great interest in case of niche truncation, i.e.~when species data only cover a part of species geographic ranges resulting in biased SDMs (Chevalier et al. 2021). This problem occurs because highly resolved distribution data are usually available over small spatial extent, typically a region or a country. In such cases, data integration methods can be used to overcome the spatial truncation of the fine-grain dataset by integrating global distribution data at coarse grains. Our findings suggest that the BEM can be a useful alternative to account for fine-grain spatial heterogeneity when fitted only with coarse-grain global dataset (Chevalier et al. 2021) or can be used in integrated SDM to refine the SER obtained from the coarse-grain global dataset (Pacifici et al. 2019). By making it possible to refine estimates of the SER at a grain that matches the ecological grain (i.e.~the grain at which ecological processes act on species), the BEM (and potentially integrated SDMs using a BEM to model the coarse grain data) should be of great interest for managers and stakeholders that need accurate predictions at a high resolution.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-ashcroft2009}{}}%
+Ashcroft, M. B., L. A. Chisholm, and K. O. French. 2009. \href{https://doi.org/10.1111/j.1365-2486.2008.01762.x}{Climate change at the landscape scale: Predicting fine-grained spatial heterogeneity in warming and potential refugia for vegetation}. Global Change Biology 15:656--667.
+
+\leavevmode\vadjust pre{\hypertarget{ref-austin2011}{}}%
+Austin, M. P., and K. P. Van Niel. 2011. \href{https://doi.org/10.1111/j.1365-2699.2010.02416.x}{Improving species distribution models for climate change studies: Variable selection and scale}. Journal of Biogeography 38:1--8.
+
+\leavevmode\vadjust pre{\hypertarget{ref-blangiardo2015}{}}%
+Blangiardo, M., and M. Cameletti. 2015. \href{https://doi.org/10.1002/9781118950203.ch8}{Advanced modeling}. Pages 259--304 Spatial and {Spatio}-temporal {Bayesian} {Models} with {R}-{INLA}. John Wiley \& Sons, Ltd.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chevalier2021}{}}%
+Chevalier, M., O. Broennimann, J. Cornuault, and A. Guisan. 2021. \href{https://doi.org/10.1002/eap.2427}{Data integration methods to account for spatial niche truncation effects in regional projections of species distribution}. Ecological Applications 31:e02427.
+
+\leavevmode\vadjust pre{\hypertarget{ref-connor2018}{}}%
+Connor, T., V. Hull, A. Vina, A. Shortridge, Y. Tang, J. Zhang, F. Wang, and J. Liu. 2018. \href{https://doi.org/10.1111/ecog.03416}{Effects of grain size and niche breadth on species distribution modeling}. Ecography 41:1270--1282.
+
+\leavevmode\vadjust pre{\hypertarget{ref-devalpine2017}{}}%
+de Valpine, P., D. Turek, C. Paciorek, C. Anderson-Bergman, D. Temple Lang, and R. Bodik. 2017. \href{https://doi.org/10.1080/10618600.2016.1172487}{Programming with models: Writing statistical algorithms for general model structures with {NIMBLE}}. Journal of Computational and Graphical Statistics 26:403--413.
+
+\leavevmode\vadjust pre{\hypertarget{ref-dormann2007promising}{}}%
+Dormann, C. F. 2007. \href{https://doi.org/10.1016/j.baae.2006.11.001}{Promising the future? {Global} change projections of species distributions}. Basic and Applied Ecology 8:387--397.
+
+\leavevmode\vadjust pre{\hypertarget{ref-dormann2007methods}{}}%
+Dormann, C. F., J. M. McPherson, M. B. Araújo, R. Bivand, J. Bolliger, G. Carl, R. G. Davies, A. Hirzel, W. Jetz, W. Daniel Kissling, I. Kühn, R. Ohlemüller, P. R. Peres-Neto, B. Reineking, B. Schröder, F. M. Schurr, and R. Wilson. 2007. \href{https://doi.org/10.1111/j.2007.0906-7590.05171.x}{Methods to account for spatial autocorrelation in the analysis of species distributional data: A review}. Ecography 30:609--628.
+
+\leavevmode\vadjust pre{\hypertarget{ref-faurby2018}{}}%
+Faurby, S., and M. B. Araújo. 2018. \href{https://doi.org/10.1038/s41558-018-0089-x}{Anthropogenic range contractions bias species climate change forecast}. Nature Climate Change 8:252--256.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fletcher2023}{}}%
+Fletcher Jr., R. J., M. G. Betts, E. I. Damschen, T. J. Hefley, J. Hightower, T. A. H. Smith, M.-J. Fortin, and N. M. Haddad. 2023. \href{https://doi.org/10.1111/geb.13658}{Addressing the problem of scale that emerges with habitat fragmentation}. Global Ecology and Biogeography 32:828--841.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gelman2013}{}}%
+Gelman, A., J. B. Carlin, H. S. Stern, D. B. Dunson, A. Vehtari, and D. B. Rubin. 2013. Bayesian {Data} {Analysis}. Third edition. Chapman; Hall, New York.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gneiting2007}{}}%
+Gneiting, T., and A. E. Raftery. 2007. \href{https://doi.org/10.1198/016214506000001437}{Strictly {Proper} {Scoring} {Rules}, {Prediction}, and {Estimation}}. Journal of the American Statistical Association 102:359--378.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gotway2002}{}}%
+Gotway, C. A., and L. J. Young. 2002. \href{https://doi.org/10.1198/016214502760047140}{Combining {Incompatible} {Spatial} {Data}}. Journal of the American Statistical Association:632--648.
+
+\leavevmode\vadjust pre{\hypertarget{ref-greenwood2016}{}}%
+Greenwood, O., H. L. Mossman, A. J. Suggitt, R. J. Curtis, and I. M. D. Maclean. 2016. \href{https://doi.org/10.1111/1365-2664.12602}{Using in situ management to conserve biodiversity under climate change}. Journal of Applied Ecology 53:885--894.
+
+\leavevmode\vadjust pre{\hypertarget{ref-guisan2013}{}}%
+Guisan, A., R. Tingley, J. B. Baumgartner, I. Naujokaitis-Lewis, P. R. Sutcliffe, A. I. T. Tulloch, T. J. Regan, L. Brotons, E. McDonald-Madden, C. Mantyka-Pringle, T. G. Martin, J. R. Rhodes, R. Maggini, S. A. Setterfield, J. Elith, M. W. Schwartz, B. A. Wintle, O. Broennimann, M. Austin, S. Ferrier, M. R. Kearney, H. P. Possingham, and Y. M. Buckley. 2013. \href{https://doi.org/10.1111/ele.12189}{Predicting species distributions for conservation decisions}. Ecology Letters 16:1424--1435.
+
+\leavevmode\vadjust pre{\hypertarget{ref-guisan2000}{}}%
+Guisan, A., and N. E. Zimmermann. 2000. \href{https://doi.org/10.1016/S0304-3800(00)00354-9}{Predictive habitat distribution models in ecology}. Ecological Modelling 135:147--186.
+
+\leavevmode\vadjust pre{\hypertarget{ref-guo2023}{}}%
+Guo, Q., A. Chen, E. T. H. Crockett, J. W. Atkins, X. Chen, and S. Fei. 2023. \href{https://doi.org/10.1002/ecy.3982}{Integrating gradient with scale in ecological and evolutionary studies}. Ecology 104:e3982.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hewitson1996}{}}%
+Hewitson, B. C., and R. G. Crane. 1996. \href{https://doi.org/10.3354/cr007085}{Climate downscaling: Techniques and application}. Climate Research 07:85--95.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hijmans2005}{}}%
+Hijmans, R. J., S. E. Cameron, J. L. Parra, P. G. Jones, and A. Jarvis. 2005. \href{https://doi.org/10.1002/joc.1276}{Very high resolution interpolated climate surfaces for global land areas}. International Journal of Climatology 25:1965--1978.
+
+\leavevmode\vadjust pre{\hypertarget{ref-keil2013}{}}%
+Keil, P., J. Belmaker, A. M. Wilson, P. Unitt, and W. Jetz. 2013. \href{https://doi.org/10.1111/j.2041-210x.2012.00264.x}{Downscaling of species distribution models: A hierarchical approach}. Methods in Ecology and Evolution 4:82--94.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kery2021}{}}%
+Kery, M., and J. A. Royle. 2021. Applied {Hierarchical} {Modeling} in {Ecology}: {Analysis} of {Distribution}, {Abundance} and {Species} {Richness} in {R} and {BUGS}: {Volume} 2: {Dynamic} and {Advanced} {Models}. Academic Press.
+
+\leavevmode\vadjust pre{\hypertarget{ref-deknegt2010}{}}%
+Knegt, H. J. de, F. van Langevelde, M. B. Coughenour, A. K. Skidmore, W. F. de Boer, I. M. A. Heitkönig, N. M. Knox, R. Slotow, C. van der Waal, and H. H. T. Prins. 2010. \href{https://doi.org/10.1890/09-1359.1}{Spatial autocorrelation and the scaling of species--environment relationships}. Ecology 91:2455--2465.
+
+\leavevmode\vadjust pre{\hypertarget{ref-latimer2006}{}}%
+Latimer, A. M., S. Wu, A. E. Gelfand, and J. A. Silander. 2006. \href{https://doi.org/10.1890/04-0609}{Building {Statistical} {Models} {To} {Analyze} {Species} {Distributions}}. Ecological Applications 16:33--50.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lembrechts2019}{}}%
+Lembrechts, J. J., I. Nijs, and J. Lenoir. 2019. \href{https://doi.org/10.1111/ecog.03947}{Incorporating microclimate into species distribution models}. Ecography 42:1267--1279.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lindgren2011}{}}%
+Lindgren, F., H. Rue, and J. Lindström. 2011. \href{https://doi.org/10.1111/j.1467-9868.2011.00777.x}{An explicit link between {Gaussian} fields and {Gaussian} {Markov} random fields: The stochastic partial differential equation approach}. Journal of the Royal Statistical Society: Series B (Statistical Methodology) 73:423--498.
+
+\leavevmode\vadjust pre{\hypertarget{ref-liu2011}{}}%
+Liu, C., M. White, and G. Newell. 2011. \href{https://doi.org/10.1111/j.1600-0587.2010.06354.x}{Measuring and comparing the accuracy of species distribution models with presence--absence data}. Ecography 34:232--243.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lu2023}{}}%
+Lu, M., and W. Jetz. 2023. \href{https://doi.org/10.1016/j.tree.2023.01.003}{Scale-sensitivity in the measurement and interpretation of environmental niches}. Trends in Ecology \& Evolution 38:554--567.
+
+\leavevmode\vadjust pre{\hypertarget{ref-manzoor2018}{}}%
+Manzoor, S. A., G. Griffiths, and M. Lukac. 2018. \href{https://doi.org/10.1038/s41598-018-25437-1}{Species distribution model transferability and model grain size -- finer may not always be better}. Scientific Reports 8:7168.
+
+\leavevmode\vadjust pre{\hypertarget{ref-minaya2018}{}}%
+Martínez-Minaya, J., M. Cameletti, D. Conesa, and M. G. Pennino. 2018. \href{https://doi.org/10.1007/s00477-018-1548-7}{Species distribution modeling: A statistical review with focus in spatio-temporal issues}. Stochastic Environmental Research and Risk Assessment 32:3227--3244.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mcinerny2011}{}}%
+McInerny, G. J., and D. W. Purves. 2011. \href{https://doi.org/10.1111/j.2041-210X.2010.00077.x}{Fine-scale environmental variation in species distribution modelling: Regression dilution, latent variables and neighbourly advice}. Methods in Ecology and Evolution 2:248--257.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mcpherson2006}{}}%
+McPherson, J. M., W. Jetz, and D. J. Rogers. 2006. \href{https://doi.org/10.1016/j.ecolmodel.2005.08.007}{Using coarse-grained occurrence data to predict species distributions at finer spatial resolutions---possibilities and limitations}. Ecological Modelling 192:499--522.
+
+\leavevmode\vadjust pre{\hypertarget{ref-meineri2017}{}}%
+Meineri, E., and K. Hylander. 2017. \href{https://doi.org/10.1111/ecog.02494}{Fine-grain, large-domain climate models based on climate station and comprehensive topographic information improve microrefugia detection}. Ecography 40:1003--1013.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mertes2018}{}}%
+Mertes, K., and W. Jetz. 2018. \href{https://doi.org/10.1111/ecog.02871}{Disentangling scale dependencies in species environmental niches and distributions}. Ecography 41:1604--1615.
+
+\leavevmode\vadjust pre{\hypertarget{ref-meynard2013}{}}%
+Meynard, C. N., and D. M. Kaplan. 2013. \href{https://doi.org/10.1111/jbi.12006}{Using virtual species to study species distributions and model performance}. Journal of Biogeography 40:1--8.
+
+\leavevmode\vadjust pre{\hypertarget{ref-muff2015}{}}%
+Muff, S., A. Riebler, L. Held, H. Rue, and P. Saner. 2015. \href{https://doi.org/10.1111/rssc.12069}{Bayesian analysis of measurement error models using integrated nested {Laplace} approximations}. Journal of the Royal Statistical Society: Series C (Applied Statistics) 64:231--252.
+
+\leavevmode\vadjust pre{\hypertarget{ref-naimi2014}{}}%
+Naimi, B., N. A. S. Hamm, T. A. Groen, A. K. Skidmore, and A. G. Toxopeus. 2014. \href{https://doi.org/10.1111/j.1600-0587.2013.00205.x}{Where is positional uncertainty a problem for species distribution modelling?} Ecography 37:191--203.
+
+\leavevmode\vadjust pre{\hypertarget{ref-norberg2019}{}}%
+Norberg, A., N. Abrego, F. G. Blanchet, F. R. Adler, B. J. Anderson, J. Anttila, M. B. Araújo, T. Dallas, D. Dunson, J. Elith, S. D. Foster, R. Fox, J. Franklin, W. Godsoe, A. Guisan, B. O'Hara, N. A. Hill, R. D. Holt, F. K. C. Hui, M. Husby, J. A. Kålås, A. Lehikoinen, M. Luoto, H. K. Mod, G. Newell, I. Renner, T. Roslin, J. Soininen, W. Thuiller, J. Vanhatalo, D. Warton, M. White, N. E. Zimmermann, D. Gravel, and O. Ovaskainen. 2019. \href{https://doi.org/10.1002/ecm.1370}{A comprehensive evaluation of predictive performance of 33 species distribution models at species and community levels}. Ecological Monographs 89:e01370.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pacifici2019}{}}%
+Pacifici, K., B. J. Reich, D. A. W. Miller, and B. S. Pease. 2019. \href{https://doi.org/10.1002/ecy.2709}{Resolving misaligned spatial data with integrated species distribution models}. Ecology 100:e02709.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pearson2003}{}}%
+Pearson, R. G., and T. P. Dawson. 2003. \href{https://doi.org/10.1046/j.1466-822X.2003.00042.x}{Predicting the impacts of climate change on the distribution of species: Are bioclimate envelope models useful?} Global Ecology and Biogeography 12:361--371.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pettorelli2014}{}}%
+Pettorelli, N., W. F. Laurance, T. G. O'Brien, M. Wegmann, H. Nagendra, and W. Turner. 2014. \href{https://doi.org/10.1111/1365-2664.12261}{Satellite remote sensing for applied ecologists: Opportunities and challenges}. Journal of Applied Ecology 51:839--848.
+
+\leavevmode\vadjust pre{\hypertarget{ref-potter2013}{}}%
+Potter, K. A., H. Arthur Woods, and S. Pincebourde. 2013. \href{https://doi.org/10.1111/gcb.12257}{Microclimatic challenges in global change biology}. Global Change Biology 19:2932--2939.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rebaudo2016}{}}%
+Rebaudo, F., E. Faye, and O. Dangles. 2016. \href{https://www.frontiersin.org/article/10.3389/fphys.2016.00139}{Microclimate {Data} {Improve} {Predictions} of {Insect} {Abundance} {Models} {Based} on {Calibrated} {Spatiotemporal} {Temperatures}}. Frontiers in Physiology 7.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rue2009}{}}%
+Rue, H., S. Martino, and N. Chopin. 2009. Approximate {Bayesian} inference for latent {Gaussian} models using integrated nested {Laplace} approximations (with discussion). Journal of the Royal Statistical Society B 71:319--392.
+
+\leavevmode\vadjust pre{\hypertarget{ref-seo2009}{}}%
+Seo, C., J. H. Thorne, L. Hannah, and W. Thuiller. 2009. \href{https://doi.org/10.1098/rsbl.2008.0476}{Scale effects in species distribution models: Implications for conservation planning under climate change}. Biology Letters 5:39--43.
+
+\leavevmode\vadjust pre{\hypertarget{ref-stark2022}{}}%
+Stark, J. R., and J. D. Fridley. 2022. \href{https://doi.org/10.1111/geb.13447}{Microclimate-based species distribution models in complex forested terrain indicate widespread cryptic refugia under climate change}. Global Ecology and Biogeography 31:562--575.
+
+\leavevmode\vadjust pre{\hypertarget{ref-steen2021}{}}%
+Steen, V. A., M. W. Tingley, P. W. C. Paton, and C. S. Elphick. 2021. \href{https://doi.org/10.1111/2041-210X.13525}{Spatial thinning and class balancing: {Key} choices lead to variation in the performance of species distribution models with citizen science data}. Methods in Ecology and Evolution 12:216--226.
+
+\leavevmode\vadjust pre{\hypertarget{ref-stoklosa2015}{}}%
+Stoklosa, J., C. Daly, S. D. Foster, M. B. Ashcroft, and D. I. Warton. 2015. \href{https://doi.org/10.1111/2041-210X.12217}{A climate of uncertainty: Accounting for error in climate variables for species distribution models}. Methods in Ecology and Evolution 6:412--423.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rcoreteam}{}}%
+Team, R. C. 2018. \href{https://www.R-project.org/}{R: {A} language and environment for statistical computing}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yates2018}{}}%
+Yates, K. L., P. J. Bouchet, M. J. Caley, K. Mengersen, C. F. Randin, S. Parnell, A. H. Fielding, A. J. Bamford, S. Ban, A. M. Barbosa, C. F. Dormann, J. Elith, C. B. Embling, G. N. Ervin, R. Fisher, S. Gould, R. F. Graf, E. J. Gregr, P. N. Halpin, R. K. Heikkinen, S. Heinänen, A. R. Jones, P. K. Krishnakumar, V. Lauria, H. Lozano-Montes, L. Mannocci, C. Mellin, M. B. Mesgaran, E. Moreno-Amat, S. Mormede, E. Novaczek, S. Oppel, G. Ortuño Crespo, A. T. Peterson, G. Rapacciuolo, J. J. Roberts, R. E. Ross, K. L. Scales, D. Schoeman, P. Snelgrove, G. Sundblad, W. Thuiller, L. G. Torres, H. Verbruggen, L. Wang, S. Wenger, M. J. Whittingham, Y. Zharikov, D. Zurell, and A. M. M. Sequeira. 2018. \href{https://doi.org/10.1016/j.tree.2018.08.001}{Outstanding {Challenges} in the {Transferability} of {Ecological} {Models}}. Trends in Ecology \& Evolution 33:790--802.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zellweger2020}{}}%
+Zellweger, F., P. De Frenne, J. Lenoir, P. Vangansbeke, K. Verheyen, M. Bernhardt-Römermann, L. Baeten, R. Hédl, I. Berki, J. Brunet, H. Van Calster, M. Chudomelová, G. Decocq, T. Dirnböck, T. Durak, T. Heinken, B. Jaroszewicz, M. Kopecký, F. Máliš, M. Macek, M. Malicki, T. Naaf, T. A. Nagel, A. Ortmann-Ajkai, P. Petřík, R. Pielech, K. Reczyńska, W. Schmidt, T. Standovár, K. Świerkosz, B. Teleki, O. Vild, M. Wulf, and D. Coomes. 2020. \href{https://doi.org/10.1126/science.aba6880}{Forest microclimate dynamics drive plant responses to warming}. Science 368:772--775.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zurell2021}{}}%
+Zurell, D., C. König, A.-K. Malchow, S. Kapitza, G. Bocedi, J. Travis, and G. Fandos. 2021. \href{https://doi.org/10.1111/ecog.05787}{Spatially explicit models for decision-making in animal conservation and restoration}. Ecography 44:1--16.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zuur2017}{}}%
+Zuur, A. F., E. N. Ieno, and A. A. Saveliev. 2017. Beginner's {Guide} to {Spatial}, {Temporal} and {Spatial}-{Temporal} {Ecological} {Data} {Analysis} with {R}-{INLA} -- {Volume1}: {Using} {GLM} and {GLMM}. Highland Statistics Ltd.
+
+\end{CSLReferences}
+
+\end{document}

@@ -1,0 +1,9 @@
+.Rproj.user
+*.Rhistory
+*.RData
+.Ruserdata
+*.pdf
+*.png
+*.csv
+redaction/title_page*
+redaction/statements*

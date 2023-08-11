@@ -1,0 +1,99 @@
+---
+title: "Supporting Information"
+output:
+  pdf_document: default
+  word_document: default
+header-includes:
+- \usepackage{float}
+- \floatplacement{figure}{H}
+#- \usepackage{flafter}
+#- \usepackage{nopageno}
+- \usepackage{lscape}
+- \usepackage{amsmath}
+- \usepackage{caption}
+- \usepackage{graphicx}
+- \graphicspath{ {../results/img/} }
+- \usepackage[left]{lineno}
+- \linenumbers
+- \usepackage{setspace}\setstretch{2}
+---
+
+# Details on parameters used to describe species-environmental relationships
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Here, we present how we derived the three ecological parameters (Fig. S1.1) describing species-environment relationships (i.e. the environmental optimum $\theta$, the maximum probability of presence $\psi_{max}$, the SER width $\omega$) from the regression coefficients. 
+
+```{r figS1.1, echo = FALSE, fig.cap = "Illustration of a bell-shaped species-environment relationship with three associated ecological parameters: the maximum probability of presence $\\psi_{max}$, the environmental optimum $\\theta$ and the ecological width $\\omega$."}
+knitr::include_graphics(path = here::here("results", "img", "figS1.png"))
+```
+
+The regression modelling SER was specified as:
+$$logit(\psi) = f(X) = \beta_0 + \beta_1X + \beta_2X^2$$
+with $\psi$ the probability of presence, $X$ the environmental value and $\beta$s the regression coefficients. 
+
+## Environmental optimum ($\theta$)
+The environmental optimum is the environmental value associated with the maximum probability of presence. $\theta$ is reached when the derivative of the regression equals zero:
+\begin{align}
+f'(\theta) &= 0 \\ 
+\beta_1 + 2\beta_2\theta &= 0 \\ 
+\theta &= \frac{-\beta_1}{2\beta_2}.
+\end{align}
+
+
+## Maximum probability of presence ($\psi_{max}$)
+$\psi_{max}$ the maximum probability of presence is reached at environmental optimum. Thus we have:
+\begin{align}
+logit(\psi_{max}) &= \beta_0 + \beta_1\theta + \beta_2\theta^2 \\ 
+\psi_{max} &= \frac{exp(\beta_0 + \beta_1\theta + \beta_2\theta^2)}{1 + exp(\beta_0 + \beta_1\theta + \beta_2\theta^2)}, \text{ with: }\theta  = \frac{-\beta_1}{2\beta_2}.
+\end{align}
+
+
+## SER width ($\omega$)
+
+$\omega$ the ecological width is a measure of the species ecological breadth (i.e. ecological tolerance) and is defined, for a bell-shaped SER, as the environmental distance between two points of the curve having a probability of presence of 0.05 (Michaelis & Diekmann, 2017). We denote this probability of presence as $\psi_{\omega} = 0.05$. Let's set $x_1$ and $x_2$ the solutions of the equation $\psi_{\omega} = 0.05 \Leftrightarrow \beta_0 + \beta_1X + \beta_2X^2 = logit(0.05)$, then we have: 
+\begin{align}
+\omega &= \lvert x_1 - x_2 \rvert \\
+\omega &= \lvert \frac{-\beta_1 + \sqrt{\Delta}}{2\beta_2} - \frac{-\beta_1 - \sqrt{\Delta}}{2\beta_2} \rvert \\
+\omega &= \lvert \frac{\sqrt{\Delta}}{\beta_2} \rvert
+\end{align}
+with $\Delta = \beta_1^2 - 4\beta_0'\beta_2 = \beta_1^2 - 4(\beta_0 - log(\frac{0.05}{1-0.05}))\beta_2$.
+
+## References
+Michaelis J. & Diekmann M.R. (2017) Biased niches – Species response curves and niche attributes from Huisman-Olff-Fresco models change with differing species prevalence and frequency. _PLOS ONE_, **12**, e0183152.
+
+# Extended results
+## Estimates of species-environment relationships
+```{r figS2, echo = FALSE, fig.cap = "Species-environment relationships estimated by the three models for the 30 replications compared to the simulated relationship (green curve) for three covariate grain sizes."}
+knitr::include_graphics(path = here::here("results", "img", "figS6.pdf"))
+```
+
+## Explanatory performance 
+```{r figS3, echo = FALSE, fig.cap = "Explanatory performances of the three alternative models (BEM: Berkson-Error Model, GLM: Generalized Linear Model, spGLM: spatial GLM) fitted with environmental values at three grain sizes coarser than the ecological grain. Filled points represent mean performance metrics over the 30 simulated train datasets (shaded points) while vertical bars represent the associated standard deviations."}
+knitr::include_graphics(path = here::here("results", "img", "figureS2.pdf"))
+```
+
+
+## Predictive performance from environmental values at covariate grain.
+```{r figS4, echo = FALSE, fig.cap = "Evaluation of predictive performance of the three models fitted with area-to-point misaligned data with regards to their ability to predict species distribution at the ecological grain from environmental values at the covariate grain across three levels of environmental spatial heterogeneity (the three columns). Filled points represent mean performance metrics over the 30 simulated train datasets (shaded points) while vertical bars represent the associated standard deviations."}
+knitr::include_graphics(path = here::here("results", "img", "figureS3.pdf"))
+```
+
+## Predictive performance from environmental values at ecological grain.
+```{r figS5, echo = FALSE, fig.cap = "Evaluation of predictive performance of the three models fitted with area-to-point misaligned data with regards to their ability to predict species distribution at the ecological grain from environmental values at the **ecological grain** across three levels of environmental spatial heterogeneity (the three columns). Filled points represent mean performance metrics over the 30 simulated train datasets (shaded points) while vertical bars represent the associated standard deviations."}
+knitr::include_graphics(path = here::here("results", "img", "figureS5.pdf"))
+```
+
+## Loss of fine-grain heterogneity when coarsening environmental data.
+
+For a given cell $i$ we defined fine-grain heterogeneity (i.e. intra cell variability $V^{intra}_i$) as the variance in point-level environmental values $X_{j(i)}$ within the cell:
+$$V^{intra}_i = \frac{1}{J_i -1} \sum_{j=1}^{J_i}(X_{j(i)} - X_i)^2 $$
+with $J_i$ the number of points within cell $i$ and $X_i$ the environmental value of cell $i$. To summarise it over the study area, we compute the mean:
+$$\overline{V^{intra}_i} = \frac{1}{N} \sum_i^N V^{intra}_i$$
+with $N$ the number of cell in the study area. Finally to visualise the loss of fine-grain heterogeneity we plot the evolution of $1 - \overline{V^{intra}_i}$ with the increase of the grain size. 
+
+```{r figS6, echo = FALSE, fig.cap = "Loss of fine-grain variability in environmental values with increasing of covariate grain size for three environmental spatial heterogeneities. Vertical dashed bars indicate covariate grain sizes used in simulation."}
+knitr::include_graphics(path = here::here("results", "img", "figS7.pdf"))
+```
+
