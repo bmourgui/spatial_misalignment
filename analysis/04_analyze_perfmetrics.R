@@ -75,7 +75,9 @@ CG <- c("c1", "c2", "c3")
 
 n.mod <- length(model)
 n.CG <- length(CG)
-n.repli <- 30
+n.repli <- min(length(l.bem.c1), 
+               length(l.glm.c1), 
+               length(l.spglm.c1)) # number of replications
 n.x <- length(x.pred)
 
 d.src <- data.frame("model" = rep(model, each = n.CG*n.repli*n.x),
