@@ -3,6 +3,11 @@
 # "Dealing with grain mismatch between response and explanatory variables in species distribution models."
 ######
 
+dir.create(here::here("results"))
+dir.create(here::here("results/img"))
+dir.create(here::here("results/table"))
+dir.create(here::here("results/simu"))
+
 # 1. Simulate data
 simulate <- TRUE
 if (simulate == TRUE){
