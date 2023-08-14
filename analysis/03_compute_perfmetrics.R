@@ -12,11 +12,18 @@
 
 
 library(magrittr)
-
-load(here::here("results", "simu", "simulated_data.RData"))
-load(file = here::here("results", "simu", "output_bem.RData"))
-load(file = here::here("results", "simu", "output_glm.RData"))
-load(file = here::here("results", "simu", "output_spglm+pred.RData"))
+if (simulate != TRUE){
+  load(here::here("results", "simu", "simulated_data.RData"))
+}
+if (run.bem != TRUE){
+  load(file = here::here("results", "simu", "output_bem.RData"))
+}
+if (run.glm != TRUE){
+  load(file = here::here("results", "simu", "output_glm.RData"))
+}
+if (run.spglm != TRUE){
+  load(file = here::here("results", "simu", "output_spglm+pred.RData"))
+}
 
 ##### NEW ######
 R <- min(length(l.bem.c1), 

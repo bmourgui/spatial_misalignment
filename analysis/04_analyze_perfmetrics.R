@@ -9,10 +9,18 @@
 
 
 source("analysis/01_simulate_data.R") # /!\ re-run 01_simulate_data.R doesn't work with saved simulated_data
-load(file = here::here("results", "simu", "output_bem.RData"))
-load(file = here::here("results", "simu", "output_glm.RData"))
-load(file = here::here("results", "simu", "output_spglm+pred.RData"))
-load(here::here("results", "simu", "summary_perf.RData"))
+if (run.bem != TRUE){
+  load(file = here::here("results", "simu", "output_bem.RData"))
+}
+if (run.glm != TRUE){
+  load(file = here::here("results", "simu", "output_glm.RData"))
+}
+if (run.spglm != TRUE){
+  load(file = here::here("results", "simu", "output_spglm+pred.RData"))
+}
+if (run.perf != TRUE){
+  load(here::here("results", "simu", "summary_perf.RData"))
+}
 
 library(magrittr)
 library(ggplot2)
@@ -199,11 +207,11 @@ extract_param_sp <- function(
 }
 
 sp_c1 <- t(mapply(function(x, y)extract_param_sp(inla = y),
-                  train[1:15], l.spglm.c1))
+                  train, l.spglm.c1))
 sp_c2 <- t(mapply(function(x, y)extract_param_sp(inla = y),
-                  train[1:15], l.spglm.c2))
+                  train, l.spglm.c2))
 sp_c3 <- t(mapply(function(x, y)extract_param_sp(inla = y),
-                  train[1:15], l.spglm.c3))
+                  train, l.spglm.c3))
 
 d_sp.x <- data.frame("grain" = rep(c("c1", "c2", "c3"), each = length(l.spglm.c1)),
                      "range.x" = c(sp_c1[, 1],

@@ -50,7 +50,7 @@ if (run.perf == TRUE){
 }
 
 # 4. Produce summary results
-source(here::here("analysis", "simu", "04_analyze_perfmetrics.R"))
+source(here::here("analysis", "04_analyze_perfmetrics.R"))
 
 # 5. Plot results
-source(here::here("analysis", "simu", "05_make_outputs.R"))
+source(here::here("analysis", "05_make_outputs.R"))

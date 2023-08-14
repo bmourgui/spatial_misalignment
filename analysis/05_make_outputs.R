@@ -55,8 +55,8 @@ data |>
 
 # Plot raster of X at coarser grain than EG
 data |> 
-  dplyr::select(lon, lat, paste0("x_c", i)) |> 
-  ggplot(aes(x = lon, y = lat, fill = get(paste0("x_c", i)))) +
+  dplyr::select(lon, lat, paste0("x_c", 3)) |> 
+  ggplot(aes(x = lon, y = lat, fill = get(paste0("x_c", 3)))) +
   geom_raster() +
   annotate("text",
            x = 500, y = 500, 
@@ -1041,7 +1041,7 @@ d.bias.beta |>
                                            "b1" = "beta[1]",
                                            "b2" = "beta[2]"),
                                  .default = label_parsed)) +
-  geom_hline(data = dTrue, aes(yintercept = true)) +
+  geom_hline(data = d.true.beta, aes(yintercept = true)) +
   theme_bw() +
   ylab("Mean estimate") +
   xlab("Grain size") +
